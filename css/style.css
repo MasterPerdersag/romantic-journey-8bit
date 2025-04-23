@@ -1,0 +1,13 @@
+body {
+  background-color: #000;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#game-container {
+  margin: 0 auto;
+  width: 800px;
+  height: 600px;
+}
