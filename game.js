@@ -15,7 +15,7 @@ const game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('background', 'assets/images/bg1.png.PNG');
-  this.load.audio('bgMusic', ['assets/audio/music.mp3']); // Passe Pfad ggf. an
+  this.load.audio('bgMusic', ['assets/assets/audio/music.mp3']); // Passe Pfad ggf. an
 }
 
 function create() {
