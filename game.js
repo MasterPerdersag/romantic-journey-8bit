@@ -16,13 +16,22 @@ function preload() {
 }
 
 function create() {
-  // Hintergrundbild korrekt skalieren
+  // Hintergrundbild
   const bg = this.add.image(0, 0, 'background');
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // "Continue"-Button zentriert unten
-  const button = this.add.rectangle(400, 550, 220, 50, 0x2ecc71).setInteractive();
+  // "Continue"-Button exakt am unteren Bildrand
+  const buttonWidth = 220;
+  const buttonHeight = 50;
+  const button = this.add.rectangle(
+    config.width / 2,
+    config.height - buttonHeight / 2,
+    buttonWidth,
+    buttonHeight,
+    0x2ecc71
+  ).setInteractive();
+
   const buttonText = this.add.text(0, 0, 'Continue', {
     font: '20px Arial',
     fill: '#ffffff'
@@ -31,6 +40,6 @@ function create() {
 
   button.on('pointerdown', () => {
     alert('Das Spiel beginnt gleich...');
-    // Hier später neue Szene starten
   });
 }
+
