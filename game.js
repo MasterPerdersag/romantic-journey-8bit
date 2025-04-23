@@ -15,7 +15,7 @@ const game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('background', 'assets/images/bg1.png.PNG');
-  this.load.audio('bgMusic', ['assets/audio/music.mp3']); // Passe Pfad ggf. an
+  this.load.audio('bgMusic', ['assets/assets/audio/music.mp3']); // Angepasster Pfad
 }
 
 function create() {
@@ -31,13 +31,13 @@ function create() {
   });
   backgroundMusic.play();
 
-  // Musiklautstärke live anpassen
+  // Musiklautstärke regeln
   const volumeSlider = document.getElementById('volumeSlider');
   volumeSlider.addEventListener('input', function () {
     backgroundMusic.setVolume(this.value);
   });
 
-  // Button-Eigenschaften
+  // Button erstellen
   const buttonWidth = 146;
   const buttonHeight = 33;
   const button = this.add.rectangle(
@@ -46,17 +46,6 @@ function create() {
     buttonWidth,
     buttonHeight,
     0x2ecc71
-  ).setInteractive().setStrokeStyle(2, 0xffffff, 0.7).setShadow(2, 2, '#000', 4, false, true);
-
-  // Text auf Button
-  const buttonText = this.add.text(0, 0, 'Continue', {
-    font: '18px Arial',
-    fill: '#ffffff'
-  });
-  Phaser.Display.Align.In.Center(buttonText, button);
-
-  // Klickfunktion
-  button.on('pointerdown', () => {
-    alert('Das Spiel beginnt gleich...');
-  });
-}
+  )
+    .setInteractive()
+    .setStrokeStyle(
