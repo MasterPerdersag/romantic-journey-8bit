@@ -34,4 +34,3 @@ function create() {
     // Hier später neue Szene starten
   });
 }
-
