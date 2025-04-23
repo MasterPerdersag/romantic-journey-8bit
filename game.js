@@ -16,27 +16,35 @@ function preload() {
 }
 
 function create() {
-  // Hintergrundbild wird exakt auf 800x600 gestreckt
+  // Hintergrundbild skaliert auf 800x600
   const bg = this.add.image(0, 0, 'background');
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // Englischer Text
-  this.add.text(80, 30, 'Happy Birthday\nWelcome to our little adventure', {
-    font: '24px Arial',
-    fill: '#ffffff',
-    align: 'left'
+  // Englischer Text oben
+  this.add.text(40, 20, 'Happy Birthday', {
+    font: '28px Arial',
+    fill: '#ffffff'
   });
 
-  // Farsi-Text
-  this.add.text(80, 120, 'تولدت مبارک\nبه ماجراجویی کوچک ما خوش آمدی', {
-    font: '24px Arial',
-    fill: '#ffcc00',
-    align: 'left'
+  this.add.text(40, 60, 'Welcome to our little adventure', {
+    font: '20px Arial',
+    fill: '#ffffff'
   });
 
-  // "Continue"-Button
-  const button = this.add.rectangle(400, 500, 220, 50, 0x2ecc71).setInteractive();
+  // Farsi-Text etwas weiter unten
+  this.add.text(40, 100, 'تولدت مبارک', {
+    font: '24px Arial',
+    fill: '#ffcc00'
+  });
+
+  this.add.text(40, 140, 'به ماجراجویی کوچک ما خوش آمدی', {
+    font: '20px Arial',
+    fill: '#ffcc00'
+  });
+
+  // "Continue"-Button zentriert am unteren Rand
+  const button = this.add.rectangle(400, 550, 220, 50, 0x2ecc71).setInteractive();
   const buttonText = this.add.text(0, 0, 'Continue', {
     font: '20px Arial',
     fill: '#ffffff'
@@ -45,6 +53,5 @@ function create() {
 
   button.on('pointerdown', () => {
     alert('Das Spiel beginnt gleich...');
-    // Hier kannst du in die nächste Szene springen
   });
 }
