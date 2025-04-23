@@ -16,9 +16,9 @@ function preload() {
 }
 
 function create() {
-  const bg = this.add.image(400, 300, 'background');
-  // Skaliert das Bild so, dass es die gesamte Fläche ohne schwarze Balken füllt
-  bg.setScale(Math.max(800 / bg.width, 600 / bg.height));
+  const bg = this.add.image(0, 0, 'background');
+  bg.setOrigin(0, 0);
+  bg.setDisplaySize(800, 600); // erzwingt exakte Größe, kein Rand
 
   this.add.text(80, 30, 'Happy Birthday\nWelcome to our little adventure', {
     font: '24px Arial',
@@ -41,6 +41,6 @@ function create() {
 
   button.on('pointerdown', () => {
     alert('Das Spiel beginnt gleich...');
-    // weitere Szene hier starten
+    // hier kannst du später weitere Spiel-Szenen laden
   });
 }
