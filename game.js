@@ -1,7 +1,7 @@
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 512,
+  height: 768,
   parent: 'game-container',
   scene: {
     preload,
@@ -19,32 +19,20 @@ function create() {
   // Hintergrundbild
   const bg = this.add.image(0, 0, 'background');
   bg.setOrigin(0, 0);
-  bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+  bg.setDisplaySize(config.width, config.height);
 
-  // Button-Daten
-  const buttonWidth = 146;
-  const buttonHeight = 33;
-
-  // Button erstellen
+  // Transparenter Button genau auf dem grafischen "Continue"
   const button = this.add.rectangle(
-    config.width / 2,
-    config.height - (buttonHeight / 2),
-    buttonWidth,
-    buttonHeight,
-    0x2ecc71
+    256,  // Mitte des Bildes (X)
+    720,  // Y-Position knapp über dem unteren Rand, exakt auf dem Bild-Button
+    140,  // Breite passend zum Button im Bild
+    36,   // Höhe des Buttons
+    0xffffff,
+    0.001 // Fast komplett transparent
   ).setInteractive();
 
-  // Text mit Schatten
-  const buttonText = this.add.text(0, 0, 'Continue', {
-    font: '18px Arial',
-    fill: '#ffffff'
-  });
-  buttonText.setShadow(2, 2, '#000000', 2, false, true);
-  Phaser.Display.Align.In.Center(buttonText, button);
-
-  // Klickfunktion
   button.on('pointerdown', () => {
-    alert('Das Spiel beginnt gleich...');
+    alert('Let the adventure begin...');
+    // Hier kannst du später zur nächsten Szene wechseln
   });
 }
-
