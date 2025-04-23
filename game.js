@@ -40,7 +40,7 @@ function create() {
   }
 
   // Unsichtbarer Button exakt unterhalb des sichtbaren "Continue"-Bereichs im Bild
-  const continueZone = this.add.zone(400, 643, 160, 30) // x, y, Breite, Höhe
+  const continueZone = this.add.zone(400, 750, 160, 30) // x, y, Breite, Höhe
     .setOrigin(0.5)
     .setInteractive({ useHandCursor: true })
     .on('pointerdown', () => {
