@@ -13,6 +13,7 @@ const game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('background', 'assets/images/bg1.png.PNG');
+  this.load.audio('bgMusic', 'assets/audio/music.mp3'); // 🎶 Musik laden
 }
 
 function create() {
@@ -21,7 +22,11 @@ function create() {
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // Kleinere Buttongröße
+  // Musik starten
+  const music = this.sound.add('bgMusic', { loop: true, volume: 0.5 });
+  music.play();
+
+  // Button
   const buttonWidth = 146;
   const buttonHeight = 33;
   const button = this.add.rectangle(
@@ -42,4 +47,3 @@ function create() {
     alert('Das Spiel beginnt gleich...');
   });
 }
-
