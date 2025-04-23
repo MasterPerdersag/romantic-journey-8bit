@@ -1,3 +1,5 @@
+let music; // für globalen Zugriff
+
 const config = {
   type: Phaser.AUTO,
   width: 800,
@@ -13,7 +15,7 @@ const game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('background', 'assets/images/bg1.png.PNG');
-  this.load.audio('bgMusic', 'assets/assets/audio/music.mp3'); // 🎶 Musik laden
+  this.load.audio('bgMusic', 'assets/assets/audio/music.mp3');
 }
 
 function create() {
@@ -23,10 +25,17 @@ function create() {
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
   // Musik starten
-  const music = this.sound.add('bgMusic', { loop: true, volume: 0.5 });
+  music = this.sound.add('bgMusic', { loop: true, volume: 0.5 });
   music.play();
 
-  // Button
+  // Lautstärkeregler verbinden
+  const volumeSlider = document.getElementById('volumeSlider');
+  volumeSlider.addEventListener('input', (event) => {
+    const volume = parseFloat(event.target.value);
+    music.setVolume(volume);
+  });
+
+  // Button-Design
   const buttonWidth = 146;
   const buttonHeight = 33;
   const button = this.add.rectangle(
@@ -35,7 +44,7 @@ function create() {
     buttonWidth,
     buttonHeight,
     0x2ecc71
-  ).setInteractive();
+  ).setInteractive({ useHandCursor: true });
 
   const buttonText = this.add.text(0, 0, 'Continue', {
     font: '18px Arial',
