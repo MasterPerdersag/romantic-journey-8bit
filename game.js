@@ -12,12 +12,12 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-  // Hintergrundbild laden
-  this.load.image('background', 'assets/images/background.png');
+  // ACHTUNG: Stelle sicher, dass bg1.png im richtigen Ordner liegt!
+  this.load.image('background', 'assets/images/bg1.png');
 }
 
 function create() {
-  // Bild mittig anzeigen (Canvas ist 800x600)
+  // Bild zentriert anzeigen
   this.add.image(400, 300, 'background').setOrigin(0.5, 0.5);
 
   // Englischer Text
@@ -34,3 +34,4 @@ function create() {
     wordWrap: { width: 600 }
   });
 }
+
