@@ -1,5 +1,3 @@
-let music; // für globalen Zugriff
-
 const config = {
   type: Phaser.AUTO,
   width: 800,
@@ -15,7 +13,7 @@ const game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('background', 'assets/images/bg1.png.PNG');
-  this.load.audio('bgMusic', 'assets/assets/audio/music.mp3');
+  this.load.audio('bgmusic', ['assets/audio/your-audio.mp3']); // Optional: Hintergrundmusik
 }
 
 function create() {
@@ -24,35 +22,26 @@ function create() {
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // Musik starten
-  music = this.sound.add('bgMusic', { loop: true, volume: 0.5 });
+  // Musik abspielen
+  const music = this.sound.add('bgmusic', { loop: true });
   music.play();
-
+  
   // Lautstärkeregler verbinden
   const volumeSlider = document.getElementById('volumeSlider');
-  volumeSlider.addEventListener('input', (event) => {
-    const volume = parseFloat(event.target.value);
-    music.setVolume(volume);
+  volumeSlider.addEventListener('input', () => {
+    music.setVolume(parseFloat(volumeSlider.value));
   });
 
-  // Button-Design
+  // Unsichtbarer Continue-Button (über dem eingebetteten Bild-Button)
   const buttonWidth = 146;
   const buttonHeight = 33;
   const button = this.add.rectangle(
     config.width / 2,
-    config.height - (buttonHeight / 2),
+    534, // Feinjustierung: exakt über dem "Continue"-Feld im Bild
     buttonWidth,
     buttonHeight,
-    0x2ecc71
-  ).setInteractive({ useHandCursor: true });
+    0x000000,
+    0 // voll transparent
+  ).setInteractive();
 
-  const buttonText = this.add.text(0, 0, 'Continue', {
-    font: '18px Arial',
-    fill: '#ffffff'
-  });
-  Phaser.Display.Align.In.Center(buttonText, button);
-
-  button.on('pointerdown', () => {
-    alert('Das Spiel beginnt gleich...');
-  });
-}
+  // Unsichtbarer Text (optional, kann komplett weggelassen werden)
