@@ -15,7 +15,7 @@ const game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('background', 'assets/images/bg1.png.PNG');
-  this.load.audio('music', ['assets/assets/audio/music.mp3']);
+  this.load.audio('bgmusic', ['assets/assets/audio/music.mp3']);
 }
 
 function create() {
@@ -24,31 +24,29 @@ function create() {
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // Musik vorbereiten
-  backgroundMusic = this.sound.add('music', {
+  // Musik laden
+  backgroundMusic = this.sound.add('bgmusic', {
     loop: true,
-    volume: parseFloat(document.getElementById('volumeSlider').value)
+    volume: 0.5
   });
 
-  // Lautstärkeregler live anpassen
+  // Lautstärkeregler mit HTML verbinden
   const volumeSlider = document.getElementById('volumeSlider');
-  volumeSlider.addEventListener('input', () => {
-    if (backgroundMusic) {
-      backgroundMusic.setVolume(parseFloat(volumeSlider.value));
-    }
-  });
+  if (volumeSlider) {
+    volumeSlider.addEventListener('input', () => {
+      const volume = parseFloat(volumeSlider.value);
+      backgroundMusic.setVolume(volume);
+    });
+  }
 
-  // Unsichtbarer interaktiver Button (exakte Koordinaten für dein Bild!)
-  const continueZone = this.add.zone(400, 538, 160, 30) // x, y, width, height
+  // Unsichtbarer Button exakt unterhalb des sichtbaren "Continue"-Bereichs im Bild
+  const continueZone = this.add.zone(400, 583, 160, 30) // x, y, Breite, Höhe
     .setOrigin(0.5)
-    .setInteractive({ useHandCursor: true }) // Cursor-Hand bei Hover
+    .setInteractive({ useHandCursor: true })
     .on('pointerdown', () => {
       if (!backgroundMusic.isPlaying) {
         backgroundMusic.play();
       }
       alert("Das Spiel beginnt gleich...");
     });
-
-  // Optional: Testweise visuell sichtbar machen (kann wieder entfernt werden)
-  // this.add.rectangle(400, 538, 160, 30, 0x00ff00, 0.3);
 }
