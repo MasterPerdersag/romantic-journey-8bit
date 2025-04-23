@@ -1,2 +1,1 @@
 add image folder
-this.load.image('background', 'assets/images/background.png');
