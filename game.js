@@ -16,21 +16,20 @@ function preload() {
 }
 
 function create() {
-  // Hintergrundbild im Originalmaßstab zentriert anzeigen
-  const bg = this.add.image(config.width / 2, config.height / 2, 'background');
-  bg.setOrigin(0.5, 0.5);
+  // Hintergrundbild exakt platzieren – keine Skalierung oder Verschiebung
+  this.add.image(0, 0, 'background').setOrigin(0, 0);
 
-  // Transparenter Button exakt auf dem Continue-Bereich im Bild
+  // Unsichtbarer Button exakt über dem Continue-Button im Bild
   const button = this.add.rectangle(
-    256,  // X-Mitte
-    725,  // Y-Position manuell angepasst
-    140,  // Breite
-    36,   // Höhe
+    256,   // X-Mitte
+    730,   // Y-Position nach Bildanalyse (leicht angepasst)
+    140,   // Breite
+    36,    // Höhe
     0xffffff,
-    0.001 // Unsichtbar
+    0.001  // Unsichtbar, aber klickbar
   ).setInteractive();
 
   button.on('pointerdown', () => {
-    alert('Let the adventure begin...');
+    alert('Let the adventure begin!');
   });
 }
