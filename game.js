@@ -16,17 +16,17 @@ function preload() {
 }
 
 function create() {
-  // Hintergrundbild exakt platzieren – keine Skalierung oder Verschiebung
+  // Hintergrund exakt und ohne Skalierung anzeigen
   this.add.image(0, 0, 'background').setOrigin(0, 0);
 
-  // Unsichtbarer Button exakt über dem Continue-Button im Bild
+  // Unsichtbarer Button exakt über dem "Continue"-Button im Bild
   const button = this.add.rectangle(
-    256,   // X-Mitte
-    730,   // Y-Position nach Bildanalyse (leicht angepasst)
-    140,   // Breite
+    256,   // X-Mitte des Bildes
+    740,   // Y-Position (leicht über Mitte des sichtbaren Buttonbereichs)
+    140,   // Breite des sichtbaren Buttonfelds im Bild
     36,    // Höhe
     0xffffff,
-    0.001  // Unsichtbar, aber klickbar
+    0.001  // fast unsichtbar – nur als Klickfläche
   ).setInteractive();
 
   button.on('pointerdown', () => {
