@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Romantic Journey 8bit</title>
+
+  <!-- 8-bit Pixel Font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       overflow: hidden;
       background-color: black;
+      font-family: 'Press Start 2P', cursive;
     }
 
     canvas {
@@ -18,18 +23,54 @@
       background-color: black;
       image-rendering: pixelated;
     }
+
+    #volume-container {
+      text-align: center;
+      margin-top: 10px;
+      color: #00ffcc;
+      font-size: 10px;
+    }
+
+    #volumeSlider {
+      width: 200px;
+      height: 10px;
+      appearance: none;
+      background-color: #444;
+      border: 2px solid #00ffcc;
+      border-radius: 4px;
+      outline: none;
+      margin-top: 5px;
+    }
+
+    #volumeSlider::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #00ffcc;
+      cursor: pointer;
+    }
+
+    #volumeSlider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      background: #00ffcc;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+  <!-- Phaser Canvas -->
   <div id="game-container"></div>
-<div style="text-align: center; margin-top: 10px;">
-  <label for="volumeSlider" style="color: white;">🔊 Volume:</label>
-  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
-</div>
+
+  <!-- Volume Control -->
+  <div id="volume-container">
+    <label for="volumeSlider">🔊 Volume:</label>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+  </div>
 
   <!-- Phaser library -->
   <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
-  <!-- Your game code -->
+  <!-- Game logic -->
   <script src="game.js"></script>
 </body>
 </html>
