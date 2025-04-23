@@ -1,0 +1,10 @@
+romantic-journey-8bit/
+├── index.html
+├── game.js
+├── assets/
+│   ├── images/
+│   ├── audio/
+│   └── translations/
+├── css/
+│   └── style.css
+└── README.md
