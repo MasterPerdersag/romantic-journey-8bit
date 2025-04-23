@@ -25,9 +25,12 @@ function create() {
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
   // Musik vorbereiten
-  backgroundMusic = this.sound.add('music', { loop: true, volume: 0.5 });
+  backgroundMusic = this.sound.add('music', {
+    loop: true,
+    volume: parseFloat(document.getElementById('volumeSlider').value)
+  });
 
-  // Lautstärkeregler verbinden
+  // Lautstärkeregler live anpassen
   const volumeSlider = document.getElementById('volumeSlider');
   volumeSlider.addEventListener('input', () => {
     if (backgroundMusic) {
@@ -35,21 +38,17 @@ function create() {
     }
   });
 
-  // Unsichtbarer Button über dem "Continue"-Bereich im Bild (Position angepasst!)
-  const button = this.add.rectangle(
-    400, // X (zentriert)
-    538, // Y (angepasst auf Position im Bild)
-    160, // Breite des Bereichs
-    30,  // Höhe des Bereichs
-    0x000000,
-    0 // vollständig transparent
-  ).setInteractive();
+  // Unsichtbarer interaktiver Button (exakte Koordinaten für dein Bild!)
+  const continueZone = this.add.zone(400, 538, 160, 30) // x, y, width, height
+    .setOrigin(0.5)
+    .setInteractive({ useHandCursor: true }) // Cursor-Hand bei Hover
+    .on('pointerdown', () => {
+      if (!backgroundMusic.isPlaying) {
+        backgroundMusic.play();
+      }
+      alert("Das Spiel beginnt gleich...");
+    });
 
-  // Klick-Ereignis
-  button.on('pointerdown', () => {
-    if (!backgroundMusic.isPlaying) {
-      backgroundMusic.play();
-    }
-    alert('Das Spiel beginnt gleich...');
-  });
+  // Optional: Testweise visuell sichtbar machen (kann wieder entfernt werden)
+  // this.add.rectangle(400, 538, 160, 30, 0x00ff00, 0.3);
 }
