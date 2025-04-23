@@ -34,4 +34,3 @@ function create() {
     wordWrap: { width: 600 }
   });
 }
-
