@@ -21,12 +21,12 @@ function create() {
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // "Continue"-Button exakt am unteren Bildrand
+  // Button ganz unten zentriert
   const buttonWidth = 220;
   const buttonHeight = 50;
   const button = this.add.rectangle(
     config.width / 2,
-    config.height - buttonHeight / 2,
+    config.height - (buttonHeight / 2),
     buttonWidth,
     buttonHeight,
     0x2ecc71
@@ -42,4 +42,3 @@ function create() {
     alert('Das Spiel beginnt gleich...');
   });
 }
-
