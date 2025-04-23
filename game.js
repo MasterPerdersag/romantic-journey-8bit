@@ -13,7 +13,7 @@ const game = new Phaser.Game(config);
 
 function preload() {
   this.load.image('background', 'assets/images/bg1.png.PNG');
-  this.load.audio('bgmusic', ['assets/audio/your-audio.mp3']); // Passe den Pfad ggf. an
+  this.load.audio('bgmusic', ['assets/audio/your-audio.mp3']); // Passe ggf. Dateiname an
 }
 
 function create() {
@@ -22,23 +22,26 @@ function create() {
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // Musik starten
-  const music = this.sound.add('bgmusic', { loop: true, volume: 0.5 });
+  // Hintergrundmusik abspielen
+  const music = this.sound.add('bgmusic', { loop: true });
   music.play();
 
-  // Lautstärke-Slider verbinden
+  // Lautstärkeregler steuern
   const volumeSlider = document.getElementById('volumeSlider');
   volumeSlider.addEventListener('input', () => {
     music.setVolume(parseFloat(volumeSlider.value));
   });
 
-  // Unsichtbarer, aber interaktiver Button
-  const buttonZone = this.add.zone(
+  // UNSICHTBARER Button – kein Text, keine Farbe, keine Umrandung
+  const invisibleButton = this.add.zone(
     config.width / 2,
-    534, // exakt auf Button-Höhe im Bild
+    534, // exakt auf dem Button im Bild
     146,
     33
-  ).setOrigin(0.5).setInteractive({ cursor: 'pointer' });
+  ).setOrigin(0.5).setInteractive();
 
-  // Optional: Debug-Rahmen für Button-Position (zum Testen)
-  // this.add.graphics().lineStyle(1, 0xff0000).strokeRectShape(buttonZone.getBounds());
+  invisibleButton.on('pointerdown', () => {
+    alert('Das Spiel beginnt gleich...');
+  });
+}
+
