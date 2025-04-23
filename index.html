@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Romantic Journey</title>
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Romantic Journey 8bit</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      background: #000;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+      background-color: black;
+      image-rendering: pixelated;
     }
   </style>
 </head>
 <body>
   <div id="game-container"></div>
 
+  <!-- Phaser library -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+  <!-- Your game code -->
   <script src="game.js"></script>
 </body>
 </html>
