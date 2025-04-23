@@ -16,22 +16,26 @@ function preload() {
 }
 
 function create() {
+  // Hintergrundbild wird exakt auf 800x600 gestreckt
   const bg = this.add.image(0, 0, 'background');
   bg.setOrigin(0, 0);
-  bg.setDisplaySize(800, 600); // erzwingt exakte Größe, kein Rand
+  bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
+  // Englischer Text
   this.add.text(80, 30, 'Happy Birthday\nWelcome to our little adventure', {
     font: '24px Arial',
     fill: '#ffffff',
     align: 'left'
   });
 
+  // Farsi-Text
   this.add.text(80, 120, 'تولدت مبارک\nبه ماجراجویی کوچک ما خوش آمدی', {
     font: '24px Arial',
     fill: '#ffcc00',
     align: 'left'
   });
 
+  // "Continue"-Button
   const button = this.add.rectangle(400, 500, 220, 50, 0x2ecc71).setInteractive();
   const buttonText = this.add.text(0, 0, 'Continue', {
     font: '20px Arial',
@@ -41,6 +45,6 @@ function create() {
 
   button.on('pointerdown', () => {
     alert('Das Spiel beginnt gleich...');
-    // hier kannst du später weitere Spiel-Szenen laden
+    // Hier kannst du in die nächste Szene springen
   });
 }
