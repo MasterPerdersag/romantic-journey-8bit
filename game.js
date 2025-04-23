@@ -21,11 +21,9 @@ function create() {
   bg.setOrigin(0, 0);
   bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-  // Button-Daten
+  // Kleinere Buttongröße
   const buttonWidth = 146;
   const buttonHeight = 33;
-
-  // Button erstellen
   const button = this.add.rectangle(
     config.width / 2,
     config.height - (buttonHeight / 2),
@@ -34,15 +32,12 @@ function create() {
     0x2ecc71
   ).setInteractive();
 
-  // Text mit Schatten
   const buttonText = this.add.text(0, 0, 'Continue', {
     font: '18px Arial',
     fill: '#ffffff'
   });
-  buttonText.setShadow(2, 2, '#000000', 2, false, true);
   Phaser.Display.Align.In.Center(buttonText, button);
 
-  // Klickfunktion
   button.on('pointerdown', () => {
     alert('Das Spiel beginnt gleich...');
   });
