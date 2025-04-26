@@ -43,7 +43,7 @@ class StartScene extends Phaser.Scene {
     // Unsichtbarer Button
     const buttonWidth = 146;
     const buttonHeight = 33;
-    const buttonY = this.sys.game.config.height - 40; // Etwas höher gesetzt
+    const buttonY = this.sys.game.config.height - 20; // Etwas höher gesetzt
 
     const button = this.add.rectangle(
       this.sys.game.config.width / 2,
