@@ -22,7 +22,7 @@ class StartScene extends Phaser.Scene {
 
     const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
-      this.sys.game.config.height - 30,  // Position 40px über dem Rand
+      this.sys.game.config.height - 15,  // Position 30px über dem Rand
       200,
       50,
       0x000000,
