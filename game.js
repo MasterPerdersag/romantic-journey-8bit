@@ -22,7 +22,7 @@ class StartScene extends Phaser.Scene {
 
     const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
-      this.sys.game.config.height - 50,  // Position 50px über dem Rand
+      this.sys.game.config.height - 50,  // Position 40px über dem Rand
       200,
       50,
       0x000000,
@@ -53,7 +53,7 @@ class SecondScene extends Phaser.Scene {
       bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
     }
 
-    this.add.text(400, 300, 'Your Adventure Continues...', {
+    this.add.text(400, 300, {
       font: '24px Arial',
       fill: '#ffffff'
     }).setOrigin(0.5);
