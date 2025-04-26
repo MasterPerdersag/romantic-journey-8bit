@@ -22,15 +22,18 @@ class StartScene extends Phaser.Scene {
 
     const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
-      this.sys.game.config.height - 15,  // Position 30px über dem Rand
+      this.sys.game.config.height - 15,
       200,
       50,
       0x000000,
-      0  // Alpha 0 = vollständig unsichtbar
+      0  // komplett unsichtbar
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
-      this.scene.start('SecondScene');
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.time.delayedCall(800, () => {
+        this.scene.start('SecondScene');
+      });
     });
   }
 }
@@ -41,17 +44,49 @@ class SecondScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background2', 'assets/images/bg2.png'); // Das nächste Hintergrundbild, falls du eines hast
+    this.load.image('background2', 'assets/images/bg2.png');
   }
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-    // Falls du ein neues Hintergrundbild möchtest:
-    if (this.textures.exists('background2')) {
-      const bg = this.add.image(0, 0, 'background2').setOrigin(0, 0);
-      bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
-    }
+    const bg = this.add.image(0, 0, 'background2').setOrigin(0, 0);
+    bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+
+    const invisibleButton = this.add.rectangle(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height - 15,
+      200,
+      50,
+      0x000000,
+      0  // unsichtbar
+    ).setInteractive();
+
+    invisibleButton.on('pointerdown', () => {
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.time.delayedCall(800, () => {
+        this.scene.start('ThirdScene');
+      });
+    });
+  }
+}
+
+class ThirdScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'ThirdScene' });
+  }
+
+  preload() {
+    this.load.image('background3', 'assets/images/bg3.png'); // falls du ein drittes Bild hast
+  }
+
+  create() {
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+    const bg = this.add.image(0, 0, 'background3').setOrigin(0, 0);
+    bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+
+    // Hier kannst du weitere Inhalte für Szene 3 ergänzen
   }
 }
 
@@ -60,7 +95,7 @@ const config = {
   width: 800,
   height: 600,
   parent: 'game-container',
-  scene: [StartScene, SecondScene]
+  scene: [StartScene, SecondScene, ThirdScene]
 };
 
 const game = new Phaser.Game(config);
