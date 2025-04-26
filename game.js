@@ -77,7 +77,7 @@ class ThirdScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background3', 'assets/images/bg3.png.PNG'); // Achte auf PNG Großschreibung
+    this.load.image('background3', 'assets/images/bg3.PNG'); // Achte auf PNG Großschreibung
   }
 
   create() {
