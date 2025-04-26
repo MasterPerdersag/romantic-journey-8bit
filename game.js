@@ -26,7 +26,7 @@ class StartScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0  // komplett unsichtbar
+      0 // komplett unsichtbar
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -59,7 +59,7 @@ class SecondScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0  // unsichtbar
+      0 // unsichtbar
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -77,7 +77,7 @@ class ThirdScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background3', 'assets/images/bg3.PNG'); // falls du ein drittes Bild hast
+    this.load.image('background3', 'assets/images/bg3.png.PNG'); // Achte auf PNG Großschreibung
   }
 
   create() {
@@ -86,7 +86,40 @@ class ThirdScene extends Phaser.Scene {
     const bg = this.add.image(0, 0, 'background3').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Hier kannst du weitere Inhalte für Szene 3 ergänzen
+    const invisibleButton = this.add.rectangle(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height - 50, // gleiche Position wie in Szene 2
+      200,
+      50,
+      0x000000,
+      0 // unsichtbar
+    ).setInteractive();
+
+    invisibleButton.on('pointerdown', () => {
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.time.delayedCall(800, () => {
+        this.scene.start('FourthScene');
+      });
+    });
+  }
+}
+
+class FourthScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'FourthScene' });
+  }
+
+  preload() {
+    this.load.image('background4', 'assets/images/bg4.png'); // Dein nächstes Bild (achte auf Dateiname)
+  }
+
+  create() {
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+    const bg = this.add.image(0, 0, 'background4').setOrigin(0, 0);
+    bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+
+    // Hier kannst du weitere Inhalte für Szene 4 ergänzen
   }
 }
 
@@ -95,7 +128,7 @@ const config = {
   width: 800,
   height: 600,
   parent: 'game-container',
-  scene: [StartScene, SecondScene, ThirdScene]
+  scene: [StartScene, SecondScene, ThirdScene, FourthScene]
 };
 
 const game = new Phaser.Game(config);
