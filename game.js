@@ -55,7 +55,7 @@ class SecondScene extends Phaser.Scene {
 
     const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
-      this.sys.game.config.height - 15,
+      this.sys.game.config.height - 30,
       200,
       50,
       0x000000,
