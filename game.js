@@ -77,7 +77,7 @@ class ThirdScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background3', 'assets/images/bg3.png'); // falls du ein drittes Bild hast
+    this.load.image('background3', 'assets/images/bg3.PNG'); // falls du ein drittes Bild hast
   }
 
   create() {
