@@ -52,11 +52,6 @@ class SecondScene extends Phaser.Scene {
       const bg = this.add.image(0, 0, 'background2').setOrigin(0, 0);
       bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
     }
-
-    this.add.text(400, 300, {
-      font: '24px Arial',
-      fill: '#ffffff'
-    }).setOrigin(0.5);
   }
 }
 
