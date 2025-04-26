@@ -1,14 +1,4 @@
-const config = {
-  type: Phaser.AUTO,
-  width: 800,
-  height: 600,
-  parent: 'game-container',
-  scene: [StartScene, GameScene]
-};
-
-const game = new Phaser.Game(config);
-
-let backgroundMusic;
+let backgroundMusic; // globale Variable für die Musik
 
 class StartScene extends Phaser.Scene {
   constructor() {
@@ -17,67 +7,73 @@ class StartScene extends Phaser.Scene {
 
   preload() {
     this.load.image('background', 'assets/images/bg1.png.PNG');
-    this.load.audio('bgMusic', 'assets/assets/audio/music.mp3');
+    this.load.audio('backgroundMusic', 'assets/assets/audio/music.mp3');
   }
 
   create() {
-    // Hintergrund
-    const bg = this.add.image(0, 0, 'background');
-    bg.setOrigin(0, 0);
+    const bg = this.add.image(0, 0, 'background').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Musik nur einmal starten, wenn sie noch nicht läuft
+    // Musik nur starten, wenn sie noch nicht läuft
     if (!backgroundMusic) {
-      backgroundMusic = this.sound.add('bgMusic', { loop: true, volume: 0.5 });
+      backgroundMusic = this.sound.add('backgroundMusic', { loop: true, volume: 0.5 });
       backgroundMusic.play();
     }
 
-    // Lautstärkeregler
-    const volumeSlider = document.getElementById('volumeSlider');
-    volumeSlider.addEventListener('input', (event) => {
-      if (backgroundMusic) {
-        backgroundMusic.setVolume(event.target.value);
-      }
-    });
-
-    // Unsichtbarer Button
-    const buttonWidth = 146;
-    const buttonHeight = 33;
-    const buttonY = this.sys.game.config.height - 20; // Etwas höher gesetzt
-
-    const button = this.add.rectangle(
+    const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
-      buttonY,
-      buttonWidth,
-      buttonHeight,
+      this.sys.game.config.height - 50,  // Position 50px über dem Rand
+      200,
+      50,
       0x000000,
-      0 // Unsichtbar
+      0  // Alpha 0 = vollständig unsichtbar
     ).setInteractive();
 
-    // Button klickbar machen
-    button.on('pointerdown', () => {
-      this.cameras.main.fadeOut(1000, 0, 0, 0);
-
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.start('GameScene');
-      });
+    invisibleButton.on('pointerdown', () => {
+      this.scene.start('SecondScene');
     });
   }
 }
 
-class GameScene extends Phaser.Scene {
+class SecondScene extends Phaser.Scene {
   constructor() {
-    super({ key: 'GameScene' });
+    super({ key: 'SecondScene' });
   }
 
   preload() {
-    this.load.image('background2', 'assets/images/bg2.png'); // Zweites Bild hier anpassen!
+    this.load.image('background2', 'assets/images/bg2.png'); // Das nächste Hintergrundbild, falls du eines hast
   }
 
   create() {
-    // Neues Hintergrundbild für Szene 2
-    const bg = this.add.image(0, 0, 'background2');
-    bg.setOrigin(0, 0);
-    bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+    // Falls du ein neues Hintergrundbild möchtest:
+    if (this.textures.exists('background2')) {
+      const bg = this.add.image(0, 0, 'background2').setOrigin(0, 0);
+      bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
+    }
+
+    this.add.text(400, 300, 'Your Adventure Continues...', {
+      font: '24px Arial',
+      fill: '#ffffff'
+    }).setOrigin(0.5);
   }
 }
+
+const config = {
+  type: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  parent: 'game-container',
+  scene: [StartScene, SecondScene]
+};
+
+const game = new Phaser.Game(config);
+
+// Lautstärke-Regler steuert globale Musik
+document.getElementById('volumeSlider').addEventListener('input', (event) => {
+  const volume = event.target.value;
+  if (backgroundMusic) {
+    backgroundMusic.setVolume(volume);
+  }
+});
