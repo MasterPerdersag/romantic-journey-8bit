@@ -8,13 +8,13 @@ class StartScene extends Phaser.Scene {
   preload() {
     this.load.image('background', 'assets/images/bg1.png.PNG');
     this.load.audio('backgroundMusic', 'assets/assets/audio/music.mp3');
+    this.load.image('heart', 'assets/images/heart.png'); // Herz schon hier laden für Szene 4
   }
 
   create() {
     const bg = this.add.image(0, 0, 'background').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Musik nur starten, wenn sie noch nicht läuft
     if (!backgroundMusic) {
       backgroundMusic = this.sound.add('backgroundMusic', { loop: true, volume: 0.5 });
       backgroundMusic.play();
@@ -26,7 +26,7 @@ class StartScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0 // komplett unsichtbar
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -59,7 +59,7 @@ class SecondScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0 // unsichtbar
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -77,7 +77,7 @@ class ThirdScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background3', 'assets/images/bg3.PNG'); // Achte auf PNG Großschreibung
+    this.load.image('background3', 'assets/images/bg3.PNG');
   }
 
   create() {
@@ -88,11 +88,11 @@ class ThirdScene extends Phaser.Scene {
 
     const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
-      this.sys.game.config.height - 50, // gleiche Position wie in Szene 2
+      this.sys.game.config.height - 50,
       200,
       50,
       0x000000,
-      0 // unsichtbar
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -110,7 +110,7 @@ class FourthScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background4', 'assets/images/bg4.png'); // Dein nächstes Bild (achte auf Dateiname)
+    this.load.image('background4', 'assets/images/bg4.png'); // neues Hintergrundbild für Szene 4
   }
 
   create() {
@@ -119,7 +119,18 @@ class FourthScene extends Phaser.Scene {
     const bg = this.add.image(0, 0, 'background4').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Hier kannst du weitere Inhalte für Szene 4 ergänzen
+    // Herz-Animation
+    const heart = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height, 'heart');
+    heart.setScale(0.1); // verkleinern falls nötig
+
+    this.tweens.add({
+      targets: heart,
+      y: 100,
+      duration: 3000,
+      ease: 'Sine.easeInOut',
+      yoyo: false,
+      repeat: 0
+    });
   }
 }
 
