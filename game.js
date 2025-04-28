@@ -120,7 +120,7 @@ class FourthScene extends Phaser.Scene {
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
     const heart = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height, 'heart');
-    heart.setScale(0.5);
+    heart.setScale(0.25);
     this.tweens.add({
       targets: heart,
       y: this.sys.game.config.height / 2,
