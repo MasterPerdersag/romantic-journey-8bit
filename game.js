@@ -8,6 +8,7 @@ class StartScene extends Phaser.Scene {
   preload() {
     this.load.image('background', 'assets/images/bg1.png.PNG');
     this.load.audio('backgroundMusic', 'assets/assets/audio/music.mp3');
+    this.load.image('heart', 'assets/images/heart1.png'); // Herz-Bild einmalig für alle späteren Szenen
   }
 
   create() {
@@ -25,7 +26,7 @@ class StartScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0 
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -58,7 +59,7 @@ class SecondScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0 
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -91,7 +92,7 @@ class ThirdScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0 
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -109,8 +110,7 @@ class FourthScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background4', 'assets/images/bg4.png'); 
-    this.load.image('heart', 'assets/images/heart1.png'); 
+    this.load.image('background4', 'assets/images/bg4.png');
   }
 
   create() {
@@ -119,17 +119,12 @@ class FourthScene extends Phaser.Scene {
     const bg = this.add.image(0, 0, 'background4').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Herz-Animation
-    const heart = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'heart');
-    heart.setScale(0.5);
-
+    const heart = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height, 'heart');
     this.tweens.add({
       targets: heart,
-      y: heart.y - 200,
-      alpha: { from: 1, to: 0 },
-      duration: 2000,
-      ease: 'Sine.easeInOut',
-      repeat: 0
+      y: this.sys.game.config.height / 2,
+      duration: 3000,
+      ease: 'Sine.easeOut'
     });
 
     const invisibleButton = this.add.rectangle(
@@ -138,7 +133,7 @@ class FourthScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0 
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
@@ -156,7 +151,7 @@ class FifthScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background5', 'assets/images/bg5.png'); 
+    this.load.image('background5', 'assets/images/bg5.png');
   }
 
   create() {
@@ -165,7 +160,38 @@ class FifthScene extends Phaser.Scene {
     const bg = this.add.image(0, 0, 'background5').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Optional: Du kannst hier eine weitere Animation oder Text einfügen
+    const invisibleButton = this.add.rectangle(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height - 50,
+      200,
+      50,
+      0x000000,
+      0
+    ).setInteractive();
+
+    invisibleButton.on('pointerdown', () => {
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.time.delayedCall(800, () => {
+        this.scene.start('SixthScene');
+      });
+    });
+  }
+}
+
+class SixthScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'SixthScene' });
+  }
+
+  preload() {
+    this.load.image('background6', 'assets/images/bg6.png');
+  }
+
+  create() {
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+    const bg = this.add.image(0, 0, 'background6').setOrigin(0, 0);
+    bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
     const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
@@ -173,27 +199,68 @@ class FifthScene extends Phaser.Scene {
       200,
       50,
       0x000000,
-      0 
+      0
     ).setInteractive();
 
     invisibleButton.on('pointerdown', () => {
-      // Hier könntest du zurück zur ersten Szene springen oder etwas anderes machen
-      console.log('End of story!');
+      this.cameras.main.fadeOut(800, 0, 0, 0);
+      this.time.delayedCall(800, () => {
+        this.scene.start('SeventhScene');
+      });
     });
   }
 }
 
+class SeventhScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'SeventhScene' });
+  }
+
+  create() {
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+    // Herzregen
+    this.time.addEvent({
+      delay: 300,
+      callback: () => {
+        const x = Phaser.Math.Between(0, this.sys.game.config.width);
+        const heart = this.add.image(x, 0, 'heart');
+        this.tweens.add({
+          targets: heart,
+          y: this.sys.game.config.height + 50,
+          duration: Phaser.Math.Between(3000, 5000),
+          ease: 'Linear',
+          onComplete: () => heart.destroy()
+        });
+      },
+      loop: true
+    });
+
+    // Liebesbotschaft
+    this.add.text(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height / 2,
+      "I love you, Maneli!",
+      {
+        font: '32px Arial',
+        fill: '#ff69b4'
+      }
+    ).setOrigin(0.5);
+  }
+}
+
+// Konfiguration
 const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
   parent: 'game-container',
-  scene: [StartScene, SecondScene, ThirdScene, FourthScene, FifthScene]
+  scene: [StartScene, SecondScene, ThirdScene, FourthScene, FifthScene, SixthScene, SeventhScene]
 };
 
 const game = new Phaser.Game(config);
 
-// Lautstärke-Regler steuert globale Musik
+// Lautstärke-Regler
 document.getElementById('volumeSlider').addEventListener('input', (event) => {
   const volume = event.target.value;
   if (backgroundMusic) {
