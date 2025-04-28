@@ -226,6 +226,7 @@ class SeventhScene extends Phaser.Scene {
       callback: () => {
         const x = Phaser.Math.Between(0, this.sys.game.config.width);
         const heart = this.add.image(x, 0, 'heart');
+        heart.setScale(0.25);
         this.tweens.add({
           targets: heart,
           y: this.sys.game.config.height + 50,
