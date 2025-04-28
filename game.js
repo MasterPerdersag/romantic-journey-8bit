@@ -8,7 +8,7 @@ class StartScene extends Phaser.Scene {
   preload() {
     this.load.image('background', 'assets/images/bg1.png.PNG');
     this.load.audio('backgroundMusic', 'assets/assets/audio/music.mp3');
-    this.load.image('heart', 'assets/images/heart.png'); // Herz schon hier laden für Szene 4
+    this.load.image('heart', 'assets/images/heart1.png'); // Herz schon hier laden für Szene 4
   }
 
   create() {
