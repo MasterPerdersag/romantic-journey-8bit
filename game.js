@@ -240,7 +240,7 @@ class SeventhScene extends Phaser.Scene {
     this.add.text(
       this.sys.game.config.width / 2,
       this.sys.game.config.height / 2,
-      "I love you, Maneli!",
+      "Happy Birthday Maneli, I love you!",
       {
         font: '32px Arial',
         fill: '#ff69b4'
