@@ -137,7 +137,7 @@ class FourthScene extends Phaser.Scene {
         duration: 1000
       });
 
-      this.time.delayedCall(10000, () => {
+      this.time.delayedCall(600, () => {
         this.tweens.add({
           targets: egg,
           alpha: 0,
