@@ -271,6 +271,7 @@ class EighthScene extends Phaser.Scene {
 
     for (let i = 0; i < 15; i++) {
       const heart = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(-100, -10), 'heart');
+      heart.setScale(0.25); // skaliert das Herz auf 25 %
       this.tweens.add({
         targets: heart,
         y: 600,
