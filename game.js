@@ -279,15 +279,6 @@ class EighthScene extends Phaser.Scene {
         repeat: -1,
         ease: 'Linear'
       });
-    }
-
-    // Liebesbotschaft
-    const message = this.add.text(
-      this.sys.game.config.width / 2,
-      100,
-      'Maneli, will you be my forever love?',
-      { font: '32px Arial', fill: '#ff69b4', align: 'center' }
-    ).setOrigin(0.5);
   }
 }
 
