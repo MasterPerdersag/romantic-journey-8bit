@@ -1,4 +1,5 @@
-let backgroundMusic; // globale Variable für Musik
+// game.js
+let backgroundMusic; // globale Variable für die Musik
 
 class StartScene extends Phaser.Scene {
   constructor() {
@@ -8,7 +9,8 @@ class StartScene extends Phaser.Scene {
   preload() {
     this.load.image('background', 'assets/images/bg1.png.PNG');
     this.load.audio('backgroundMusic', 'assets/assets/audio/music.mp3');
-    this.load.image('heart', 'assets/images/heart1.png'); // Herz für Animation
+    this.load.image('heart', 'assets/images/heart1.png');
+    this.load.image('easteregg', 'assets/images/easteregg.png'); // Osterbild
   }
 
   create() {
@@ -126,6 +128,24 @@ class FourthScene extends Phaser.Scene {
       repeat: -1
     });
 
+    heart.setInteractive();
+    heart.on('pointerdown', () => {
+      const egg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'easteregg').setAlpha(0).setScale(0.8).setOrigin(0.5);
+      this.tweens.add({
+        targets: egg,
+        alpha: 1,
+        duration: 1000
+      });
+
+      this.time.delayedCall(10000, () => {
+        this.tweens.add({
+          targets: egg,
+          alpha: 0,
+          duration: 1000
+        });
+      });
+    });
+
     const invisibleButton = this.add.rectangle(
       this.sys.game.config.width / 2,
       this.sys.game.config.height - 50,
@@ -222,7 +242,7 @@ class SeventhScene extends Phaser.Scene {
     const bg = this.add.image(0, 0, 'background7').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    const text = this.add.text(
+    this.add.text(
       this.sys.game.config.width / 2,
       500,
       'Just one last surprise...',
@@ -261,10 +281,8 @@ class EighthScene extends Phaser.Scene {
     const bg = this.add.image(0, 0, 'background8').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Herzregen (skaliert auf 0.25)
     for (let i = 0; i < 15; i++) {
-      const heart = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(-100, -10), 'heart')
-        .setScale(0.25);
+      const heart = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(-100, -10), 'heart').setScale(0.25);
       this.tweens.add({
         targets: heart,
         y: 600,
@@ -274,18 +292,26 @@ class EighthScene extends Phaser.Scene {
         ease: 'Linear'
       });
     }
+
+    const restartButton = this.add.text(650, 560, 'Restart', {
+      font: '18px Arial',
+      fill: '#ffffff',
+      backgroundColor: '#000000',
+      padding: { x: 10, y: 5 },
+      borderRadius: 5
+    }).setInteractive();
+
+    restartButton.on('pointerdown', () => {
+      this.scene.start('StartScene');
+    });
   }
 }
 
 const config = {
   type: Phaser.AUTO,
+  width: 800,
+  height: 600,
   parent: 'game-container',
-  scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 800,
-    height: 600
-  },
   scene: [
     StartScene,
     SecondScene,
@@ -300,7 +326,6 @@ const config = {
 
 const game = new Phaser.Game(config);
 
-// Lautstärke-Regler
 document.getElementById('volumeSlider').addEventListener('input', (event) => {
   const volume = event.target.value;
   if (backgroundMusic) {
