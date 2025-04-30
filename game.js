@@ -8,7 +8,7 @@ class StartScene extends Phaser.Scene {
   preload() {
     this.load.image('background', 'assets/images/bg1.png.PNG');
     this.load.audio('backgroundMusic', 'assets/assets/audio/music.mp3');
-    this.load.image('heart', 'assets/images/heart1.png'); // Herz für Animation
+    this.load.image('heart', 'assets/images/heart1.png');
   }
 
   create() {
@@ -268,7 +268,6 @@ class EighthScene extends Phaser.Scene {
     const bg = this.add.image(0, 0, 'background8').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    // Herzregen
     for (let i = 0; i < 15; i++) {
       const heart = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(-100, -10), 'heart');
       this.tweens.add({
@@ -279,6 +278,7 @@ class EighthScene extends Phaser.Scene {
         repeat: -1,
         ease: 'Linear'
       });
+    }
   }
 }
 
@@ -304,11 +304,6 @@ const game = new Phaser.Game(config);
 // Lautstärke-Regler
 document.getElementById('volumeSlider').addEventListener('input', (event) => {
   const volume = event.target.value;
-  if (backgroundMusic) {
-    backgroundMusic.setVolume(volume);
-  }
-});
-
   if (backgroundMusic) {
     backgroundMusic.setVolume(volume);
   }
