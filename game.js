@@ -1,4 +1,4 @@
-let backgroundMusic; // globale Variable für die Musik
+let backgroundMusic; // globale Variable für Musik
 
 class StartScene extends Phaser.Scene {
   constructor() {
@@ -8,7 +8,7 @@ class StartScene extends Phaser.Scene {
   preload() {
     this.load.image('background', 'assets/images/bg1.png.PNG');
     this.load.audio('backgroundMusic', 'assets/assets/audio/music.mp3');
-    this.load.image('heart', 'assets/images/heart1.png');
+    this.load.image('heart', 'assets/images/heart1.png'); // Herz für Animation
   }
 
   create() {
@@ -49,7 +49,6 @@ class SecondScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
     const bg = this.add.image(0, 0, 'background2').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
@@ -82,7 +81,6 @@ class ThirdScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
     const bg = this.add.image(0, 0, 'background3').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
@@ -115,12 +113,10 @@ class FourthScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
     const bg = this.add.image(0, 0, 'background4').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
-    const heart = this.add.image(this.sys.game.config.width / 2, 500, 'heart');
-    heart.setScale(0.25); // skaliert das Herz auf 25 %
+    const heart = this.add.image(this.sys.game.config.width / 2, 500, 'heart').setScale(0.25);
     this.tweens.add({
       targets: heart,
       y: 200,
@@ -159,7 +155,6 @@ class FifthScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
     const bg = this.add.image(0, 0, 'background5').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
@@ -192,7 +187,6 @@ class SixthScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
     const bg = this.add.image(0, 0, 'background6').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
@@ -225,7 +219,6 @@ class SeventhScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-
     const bg = this.add.image(0, 0, 'background7').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
@@ -265,13 +258,13 @@ class EighthScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.fadeIn(1500, 0, 0, 0);
-
     const bg = this.add.image(0, 0, 'background8').setOrigin(0, 0);
     bg.setDisplaySize(this.sys.game.config.width, this.sys.game.config.height);
 
+    // Herzregen (skaliert auf 0.25)
     for (let i = 0; i < 15; i++) {
-      const heart = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(-100, -10), 'heart');
-      heart.setScale(0.25); // skaliert das Herz auf 25 %
+      const heart = this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(-100, -10), 'heart')
+        .setScale(0.25);
       this.tweens.add({
         targets: heart,
         y: 600,
