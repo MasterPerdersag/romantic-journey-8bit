@@ -1,4 +1,3 @@
-// game.js
 let backgroundMusic; // globale Variable für die Musik
 
 class StartScene extends Phaser.Scene {
@@ -131,17 +130,12 @@ class FourthScene extends Phaser.Scene {
     heart.setInteractive();
     heart.on('pointerdown', () => {
       const egg = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'easteregg').setAlpha(0).setScale(0.8).setOrigin(0.5);
-      this.tweens.add({
-        targets: egg,
-        alpha: 1,
-        duration: 1000
-      });
-
-      this.time.delayedCall(400, () => {
+      this.tweens.add({ targets: egg, alpha: 1, duration: 500 });
+      this.time.delayedCall(2000, () => {
         this.tweens.add({
           targets: egg,
           alpha: 0,
-          duration: 1000
+          duration: 500
         });
       });
     });
@@ -309,8 +303,12 @@ class EighthScene extends Phaser.Scene {
 
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 800,
+    height: 600
+  },
   parent: 'game-container',
   scene: [
     StartScene,
